@@ -10,11 +10,17 @@
 
 </body>
 <script>
-    $(document).ready(function(){
-        for(i=1;i<=151;i++)
-        {
-            $('body').append("<img src='http://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/"+i+".png'>");
-        }
+    
+    for(i = 1; i <= 151; i++)
+    {
+         $('body').append("<img id='"+i+"' src='http://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/"+i+".png'>");
+    }
+    
+    $(this).click(function(){
+        url="https://pokeapi.co/api/v2/pokemon/1"
+        $.get(url,function(res){
+            console.log(res);
+        },'json');
     })
 </script>
 </html>
