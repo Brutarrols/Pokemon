@@ -16,8 +16,9 @@
          $('body').append("<img id='"+i+"' src='http://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/"+i+".png'>");
     }
     
-    $(this).click(function(){
-        url="https://pokeapi.co/api/v2/pokemon/1"
+    $('img').click(function(){
+        //console.log($(this).attr("id"));
+        url="https://pokeapi.co/api/v2/pokemon/"+$(this).attr('id');
         $.get(url,function(res){
             console.log(res);
         },'json');
