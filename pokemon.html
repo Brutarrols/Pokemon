@@ -6,22 +6,87 @@
     <script src="jquery-3.5.1.min.js"></script>
     <title>pokemon</title>
 </head>
+<style>
+    *
+    {
+        margin: 0;
+        padding: 0;
+    }
+    #pokeselect
+    {
+        max-width: 950px;
+        background-color: coral;
+        display: inline-block;
+    }
+    #pokedex
+    {
+        
+        
+    }
+    aside
+    {
+        max-width: 350px;
+        width: 100%;
+        background-color: cornflowerblue;
+        text-align: center;
+        vertical-align: top;
+        display: inline-block;
+    }
+    h1
+    {
+        margin: 10px;
+    }
+    h3
+    {
+        margin: 5px;
+    }
+    
+    li
+    {
+        list-style: none;
+    }
+</style>
 <body>
+    <div id="pokeselect"></div>
+    <aside>
+        <h1>Pokedex</h1>
+        <div id="pokedex">
+        
 
+        </div>
+    </aside>
 </body>
 <script>
     
     for(i = 1; i <= 151; i++)
     {
-         $('body').append("<img id='"+i+"' src='http://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/"+i+".png'>");
+         $('#pokeselect').append("<img id='"+i+"' src='http://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/"+i+".png'>");
     }
+
+
     
     $('img').click(function(){
         //console.log($(this).attr("id"));
-        url="https://pokeapi.co/api/v2/pokemon/"+$(this).attr('id');
+        idveri = $(this).attr('id');
+        url="https://pokeapi.co/api/v2/pokemon/"+idveri;
         $.get(url,function(res){
-            console.log(res);
+            //console.log(res);
+            $('#pokedex').children().remove();
+           
+            $('#pokedex').append("<h2>"+res.name+"</h2>");
+            $('#pokedex').append("<img id='"+idveri+"' src='http://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/"+idveri+".png'>");
+            $('#pokedex').append("<h3>Types<h3>");
+            $('#pokedex').append("<ul>");
+            for(i = 0; i < res.types.length; i++)
+            {
+                $('#pokedex').append("<li>"+res.types[i].type.name+"</li>");
+            }
+            $('#pokedex').append("</ul>");
+            $('#pokedex').append("<h3>Heigth<h3>");
+            $('#pokedex').append("<p>"+res.height +"</p>");
+            $('#pokedex').append("<h3>Weigth<h3>");
+            $('#pokedex').append("<p>"+res.weight +"</p>");
         },'json');
-    })
+    });
 </script>
 </html>
